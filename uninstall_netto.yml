@@ -1,0 +1,10 @@
+- name: Remove Netto installation from several hosts
+  hosts: monitored_hosts
+  become: yes
+
+  tasks:
+    - name: Stop and remove Netto Container
+      docker_container:
+        name: netto
+        state: absent
+        remove_volumes: yes  

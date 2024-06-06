@@ -1,0 +1,24 @@
+- name: Install netto on several hosts
+  hosts: monitored_hosts
+  become: yes
+
+  vars:
+    pyroscope_server_address: "your_pyroscope_server_address"
+
+  tasks:
+    - name: Obtain host name
+      command: hostname
+      register: hostname_output
+
+    - name: Run Netto container
+      docker_container:
+        name: netto
+        image: pucciorenzo/netto:latest
+        state: started
+        restart_policy: unless-stopped
+        privileged: yes
+        env:
+          NETTO_HOST: "{{ hostname_output.stdout }}"
+        ports:
+          - "8080:8080"
+        command: "--address {{ pyroscope_server_address }} "
