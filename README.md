@@ -1,4 +1,4 @@
-# Netto-from-script
+# Netto deployment with Ansible
 This ansible script allows to install [Netto](https://github.com/miolad/netto) tool on a set of hosts.
 ## Requisites
 - Linux Kernel version: **5.5**
